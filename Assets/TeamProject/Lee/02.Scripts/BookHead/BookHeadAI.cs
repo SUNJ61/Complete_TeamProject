@@ -134,7 +134,7 @@ public class BookHeadAI : MonoBehaviour
                     break;
             }
         }
-        if (!BookHead_isKill)
+        if (!BookHead_isKill && !BookHead_isDie)
             BookHead_Movement.PlayerDie();
     }
 
