@@ -8,6 +8,9 @@ public class Inventory : MonoBehaviour
     private InventoryUpdate Slot_Idx;
     private Transform Camera_Tr;
 
+    private float prevTime;
+    private float delay = 0.1f;
+
     [SerializeField]private int GunIdx;
     [SerializeField]private int FlashIdx;
     [SerializeField]private int HealPackIdx;
@@ -65,6 +68,8 @@ public class Inventory : MonoBehaviour
             ItemSlots.Add(Camera_Tr.GetChild(i).gameObject);
         }
         ItemSlots.RemoveAt(0);
+
+        prevTime = Time.time;
     }
 
     public void GetItem(ItemData data) //먹은 아이템 플레이어 손으로 이동, 퀵슬롯 이미지 띄우는 코드도 여기서 제작
@@ -161,13 +166,17 @@ public class Inventory : MonoBehaviour
 
     public void DropItem() //아이템을 땅에버린다. 땅 위치값 필요.
     {
-        GameObject item = ItemSlots[Slot_Idx.Inventory_Idx].transform.GetChild(0).gameObject;
+        if (Time.time - prevTime > delay)
+        {
+            GameObject item = ItemSlots[Slot_Idx.Inventory_Idx].transform.GetChild(0).gameObject;
 
-        item.transform.position = transform.position; //플레이어 발 위치로 아이템 이동
-        item.transform.parent = null; // 아이템을 월드 공간으로 떨어뜨린다.
-        item.SendMessage("DropItem");
+            item.transform.position = transform.position; //플레이어 발 위치로 아이템 이동
+            item.transform.parent = null; // 아이템을 월드 공간으로 떨어뜨린다.
+            item.SendMessage("DropItem");
 
-        CanGetItem = true;
+            CanGetItem = true;
+            prevTime = Time.time;
+        }
     }
 
     public void AddBullet(int amount)

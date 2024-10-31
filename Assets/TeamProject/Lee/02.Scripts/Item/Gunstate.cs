@@ -50,7 +50,7 @@ public class Gunstate : MonoBehaviour, IItem
 
     public void CatchItem()
     {
-        if (Time.time - prevTime > CatchDelay) //여러번 호출 되는 것 방지.
+        if (Time.time - prevTime > CatchDelay && inventory.CanGetItem) //여러번 호출 되는 것 방지.
         {
             prevTime = Time.time;
             inventory.GetItem(GunData);

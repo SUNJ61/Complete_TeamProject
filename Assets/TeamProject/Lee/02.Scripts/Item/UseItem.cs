@@ -38,7 +38,7 @@ public class UseItem : MonoBehaviour
     }
     private void UsingItem() //모든 아이템 사용 함수들 만들기.
     {
-        if(IsUse && ItemSlots[Inventory_Idx].transform.childCount != 0) //이 함수 하나로 모든 아이템 작동 가능.
+        if (IsUse && ItemSlots[Inventory_Idx].transform.childCount != 0) //이 함수 하나로 모든 아이템 작동 가능.
             ItemSlots[Inventory_Idx].transform.GetChild(0).SendMessage("Use", Inventory_Idx);
     }
 }

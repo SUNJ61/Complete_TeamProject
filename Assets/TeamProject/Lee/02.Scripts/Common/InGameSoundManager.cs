@@ -175,7 +175,7 @@ public class InGameSoundManager : MonoBehaviour
     {
         if (setActive) // 사운드 박스를 계속 활성화 한다면 사운드 클립 교체
             Data[key].SoundBox_AudioSource.clip = clip;
-        else // 사운드 박스를 비활성화 한다면 0.1초후 사운드 박스 비활성화
-            StartCoroutine(DisableSoundBox(Data[key].SoundBox, 0.1f));
+        else // 사운드 박스를 비활성화 한다면 0.01초후 사운드 박스 비활성화
+            StartCoroutine(DisableSoundBox(Data[key].SoundBox, 0.01f));
     }
 }

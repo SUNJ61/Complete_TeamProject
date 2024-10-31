@@ -110,7 +110,7 @@ public class FlashLight : MonoBehaviour, IItem
 
     public void CatchItem()
     {
-        if (Time.time - prevTime > Delay)
+        if (Time.time - prevTime > Delay && inventory.CanGetItem)
         {
             inventory.GetItem(FlashLightData);
             InGameSoundManager.instance.ActiveSound(gameObject, FlashTogle, 2.0f, false, false, true, 1);

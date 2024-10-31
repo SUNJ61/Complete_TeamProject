@@ -8,6 +8,7 @@ public class HealPack : MonoBehaviour, IItem
 
     private GameObject Player;
     private Inventory inventory;
+    private CamerRay camerRay;
     private PlayerHealth playerHealth;
     private AudioClip Heal;
 
@@ -22,6 +23,7 @@ public class HealPack : MonoBehaviour, IItem
         HealPackData = new ItemData(gameObject, null, 3, "HealPackImg_Group");
         Player = GameObject.Find("Player");
         inventory = Player.GetComponent<Inventory>();
+        camerRay = Player.transform.GetChild(0).GetComponent<CamerRay>();
         playerHealth = Player.GetComponent<PlayerHealth>();
 
         Heal = Resources.Load<AudioClip>("Sound/Item/Heal");
@@ -33,7 +35,7 @@ public class HealPack : MonoBehaviour, IItem
 
     public void CatchItem()
     {
-        if (Time.time - prevTime > CatchDelay) //여러번 호출 되는 것 방지.
+        if (Time.time - prevTime > CatchDelay && inventory.CanGetItem) //여러번 호출 되는 것 방지.
         {
             prevTime = Time.time;
             inventory.GetItem(HealPackData);           
@@ -51,8 +53,9 @@ public class HealPack : MonoBehaviour, IItem
             Destroy(this.gameObject);
             inventory.CanGetItem = true;            
         }
-        else if(playerHealth.health >= 10)
+        else if(playerHealth.health >= 10 && !camerRay.UseFalse)
         {
+            camerRay.UseFalse = true;
             InGameUIManager.instance.SetPlayerUI_Text("체력이 닳지 않았습니다.");
         }
     }
