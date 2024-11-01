@@ -4935,7 +4935,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Thrill Factory
+  m_Text: Damned            Ritual
 --- !u!222 &1983907433
 CanvasRenderer:
   m_ObjectHideFlags: 0
