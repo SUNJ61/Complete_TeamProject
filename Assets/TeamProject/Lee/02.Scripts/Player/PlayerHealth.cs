@@ -43,7 +43,7 @@ public class PlayerHealth : CretureUpdate
         InGameSoundManager.instance.ActiveSound(gameObject, PlayerHit, 2.0f, true, false, false, 1);
         base.OnDamage(param);
 
-        if (health==0 && MobCount == 0)
+        if (health <=0 && MobCount == 0 && !GameManager.G_instance.isGameover)
         {
             
             GameManager.G_instance.isGameover = true;
@@ -51,17 +51,14 @@ public class PlayerHealth : CretureUpdate
             GameObject demon = (GameObject)param[0];
             demon.SendMessage("KillPlayer");
             StartCoroutine(IncreaseVignetteRoundness_Demon());
-            //playerMove.PlayerSource.Stop();
-
         }
-        else if (health == 0 && MobCount == 1)
+        else if (health <= 0 && MobCount == 1 && !GameManager.G_instance.isGameover)
         {
             GameManager.G_instance.isGameover = true;
 
             GameObject bookhead = (GameObject)param[0];
             bookhead.SendMessage("KillPlayer");
             StartCoroutine(IncreaseVignetteRoundness_BookHead());
-            //playerMove.PlayerSource.Stop();
         }
     }
 

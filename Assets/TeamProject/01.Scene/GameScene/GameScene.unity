@@ -49120,7 +49120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: OPtion
+  m_Text: Option
 --- !u!4 &8458236606194467384
 Transform:
   m_ObjectHideFlags: 0

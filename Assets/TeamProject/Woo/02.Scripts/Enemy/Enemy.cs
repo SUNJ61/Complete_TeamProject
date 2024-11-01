@@ -54,12 +54,17 @@ public class Enemy : MonoBehaviour
     }
     private void OnEnable()
     {
-        timer = 0;
+        StartCoroutine(DelayedStart());
+    }
+
+    private IEnumerator DelayedStart()
+    {
+        yield return new WaitForSeconds(1f);
         StartCoroutine(StartFollowingPlayer());
-        InvokeRepeating(nameof(UpdateTimer), 0f, 1f); 
+        timer = 0;
+        InvokeRepeating(nameof(UpdateTimer), 0f, 1f);
         rb.isKinematic = false;
         isDead = false;
-       
     }
 
     private void UpdateTimer()
@@ -154,7 +159,7 @@ public class Enemy : MonoBehaviour
         timer = 0;
     }
     IEnumerator StartFollowingPlayer()
-    { 
+    {
         while (true) 
         {
             FollowPlayertoAttack();
