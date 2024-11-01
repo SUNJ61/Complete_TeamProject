@@ -22,7 +22,7 @@ public class SceneManger : MonoBehaviour
 
     public void NextGameScene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("LoddingScene");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         

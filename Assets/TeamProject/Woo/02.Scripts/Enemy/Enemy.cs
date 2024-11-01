@@ -54,18 +54,21 @@ public class Enemy : MonoBehaviour
     }
     private void OnEnable()
     {
+ 
         StartCoroutine(DelayedStart());
+        
     }
 
     private IEnumerator DelayedStart()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f); // 2√  ¥Î±‚
         StartCoroutine(StartFollowingPlayer());
         timer = 0;
         InvokeRepeating(nameof(UpdateTimer), 0f, 1f);
         rb.isKinematic = false;
         isDead = false;
     }
+
 
     private void UpdateTimer()
     {
@@ -84,6 +87,7 @@ public class Enemy : MonoBehaviour
 
     private void FollowPlayertoAttack()
     {
+       
         if (!GameManager.G_instance.isGameover)
         {
             var Distance = Vector3.Distance(PlayerPos.transform.position, tr.transform.position);

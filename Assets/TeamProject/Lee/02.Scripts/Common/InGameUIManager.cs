@@ -211,13 +211,8 @@ public class InGameUIManager : MonoBehaviour
 
 
     public void QuitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-
-#else
-       Application.Quit();
-#endif
+    { 
+        SceneManger.S_instance.NextLobbyScene();
     }
     public void Uioff_PlayerDead()
     {

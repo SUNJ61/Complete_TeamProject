@@ -1128,7 +1128,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 2.5
   m_Range: 5.31
   m_SpotAngle: 70.04148
   m_InnerSpotAngle: 21.80208
@@ -4935,7 +4935,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Damned            Ritual
+  m_Text: Damned      Ritual
 --- !u!222 &1983907433
 CanvasRenderer:
   m_ObjectHideFlags: 0
