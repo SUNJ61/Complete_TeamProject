@@ -8,10 +8,11 @@ public class ExitDoor : MonoBehaviour, IItem
 {
     MeshCollider DoorCol;
     AudioClip DoorOpen;
+    AudioClip EndingSound;
     void Start()
     {
         DoorOpen = Resources.Load<AudioClip>("Sound/Object/EndDoorOpen");
-
+        EndingSound = Resources.Load<AudioClip>("Sound/BG/InGameBG");
         DoorCol = GetComponent<MeshCollider>();
         DoorCol.enabled = false;
     }
@@ -24,6 +25,8 @@ public class ExitDoor : MonoBehaviour, IItem
     {
         StartCoroutine(EndingimgStart());
         InGameSoundManager.instance.ActiveSound(gameObject, DoorOpen, 10, true, false, false, 1);
+        InGameSoundManager.instance.EditSoundBox("InGameBG",false);
+        InGameSoundManager.instance.Data.Remove("InGameBG");
 
     }
     IEnumerator EndingimgStart()
@@ -34,11 +37,11 @@ public class ExitDoor : MonoBehaviour, IItem
     }
     public void Use()
     {
-        //ÀÎº¥Åä¸®¿¡¼­ »ç¿ëÇÏ´Â ¾ÆÀÌÅÛ¾Æ´Ô ±¸Çö x
+        //ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¾Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ x
     }
 
     public void ItemUIOn()
     {
-        InGameUIManager.instance.SetPlayerUI_Text("Å»ÃâÇÏ±â [G]");
+        InGameUIManager.instance.SetPlayerUI_Text("Å»ï¿½ï¿½ï¿½Ï±ï¿½ [G]");
     }
 }

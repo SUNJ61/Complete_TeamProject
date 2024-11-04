@@ -16,12 +16,13 @@ public class Enemy : MonoBehaviour
     public Transform tr;
     [SerializeField] Light DeadSceneLight;
     [SerializeField] PlayableDirector director;
-    [Tooltip("°ø°Ý»ç°Å¸®¿Í ÆÄ¾ÇÀ§Ä¡ »ç°Å¸®")]
+    [Tooltip("ï¿½ï¿½ï¿½Ý»ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ä¾ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½Å¸ï¿½")]
     float distance = 20;
     float attackside = 2.0f;
     public int Demon_Counter = 0;
     public bool Killplayer = false;
     private bool isDead = false;
+    public bool DemonDie = false;
     float timer = 0;
     [SerializeField] CinemachineStateDrivenCamera State_Demon;
     [SerializeField] CinemachineVirtualCamera VirtualCamera_Demon;
@@ -49,19 +50,20 @@ public class Enemy : MonoBehaviour
         DemonDie_SFX = Resources.Load<AudioClip>("Sound/Demon/DemonDie");
         DemonAttack_SFX = Resources.Load<AudioClip>("Sound/Demon/DemonAttackSound");
         enemyFlash = gameObject.GetComponent<EnemyFlashDamage>();
-
+        
 
     }
     private void OnEnable()
     {
- 
+
+        DemonDie = false;
         StartCoroutine(DelayedStart());
         
     }
 
     private IEnumerator DelayedStart()
     {
-        yield return new WaitForSeconds(1f); // 2ÃÊ ´ë±â
+        yield return new WaitForSeconds(1f); // 2ï¿½ï¿½ ï¿½ï¿½ï¿½
         StartCoroutine(StartFollowingPlayer());
         timer = 0;
         InvokeRepeating(nameof(UpdateTimer), 0f, 1f);
@@ -144,7 +146,9 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator FalseDemon()
     {
+        DemonDie = true;
         StopCoroutine(StartFollowingPlayer());
+        StopCoroutine(enemyFlash.FlashingCoroutine());
         if (InGameSoundManager.instance.Data.ContainsKey($"DemonBgSound_{Demon_Counter}"))
         {
             InGameSoundManager.instance.EditSoundBox($"DemonBgSound_{Demon_Counter}", false);
@@ -161,13 +165,14 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
         timer = 0;
+        DemonDie = false;
     }
     IEnumerator StartFollowingPlayer()
     {
         while (true) 
         {
             FollowPlayertoAttack();
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
     }
     void KillPlayer()
@@ -187,7 +192,7 @@ public class Enemy : MonoBehaviour
         DeadSceneLight.enabled = true;
         StopCoroutine("FalseDemon()");
         StopCoroutine("StartFollowingPlayer()");
-        agent.isStopped = true; // ÀÌµ¿ ¸ØÃã
+        agent.isStopped = true; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
         agent.speed = 0;
         animator.SetTrigger("Kill");
         rb.freezeRotation = true;

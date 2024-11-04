@@ -50,32 +50,37 @@ public class EnemyFlashDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("FlashCol"))
+        if (!enemy.DemonDie)
         {
-            currentCollider = other; // 현재 충돌체 저장
-            Debug.Log(currentCollider);
-
-            if (currentCollider.enabled) // 콜라이더가 활성화되어 있을 때
+            if (other.gameObject.CompareTag("FlashCol"))
             {
-               
-                isFlashing = true;
-                particle_somoke.Play();
+                currentCollider = other; // 현재 충돌체 저장
+                Debug.Log(currentCollider);
 
-                // 사운드 재생 로직
-                if (!isSoundPlay && Demon_Steam != null)
+                if (currentCollider.enabled) // 콜라이더가 활성화되어 있을 때
                 {
-                    Demon_Steam.name = $"Demon_Steam_{Demon_Counter}";
-                    InGameSoundManager.instance.ActiveSound(gameObject, Demon_Steam, 5, true, true, true, 1);
-                    isSoundPlay = true;
+
+                    isFlashing = true;
+                    particle_somoke.Play();
+
+                    // 사운드 재생 로직
+                    if (!isSoundPlay && Demon_Steam != null)
+                    {
+                        Demon_Steam.name = $"Demon_Steam_{Demon_Counter}";
+                        InGameSoundManager.instance.ActiveSound(gameObject, Demon_Steam, 5, true, true, true, 1);
+                        isSoundPlay = true;
+                    }
+
+
+                    StartCoroutine(FlashingCoroutine()); // 코루틴 시작
                 }
-
-
-                StartCoroutine(FlashingCoroutine()); // 코루틴 시작
             }
+
         }
+        
     }
 
-    private IEnumerator FlashingCoroutine()
+    public IEnumerator FlashingCoroutine()
     {
         while (isFlashing && timer < 3f)
         {
@@ -102,9 +107,12 @@ public class EnemyFlashDamage : MonoBehaviour
                             Enemyanimator.SetTrigger("Flash"); // 애니메이션 트리거
 
                             yield return new WaitForSeconds(4.5f); // 대기
-                            Demon_cap.enabled = true; // 충돌 활성화
-                            Enemyagent.speed = 5;
-                            Enemyagent.isStopped = false; // 다시 이동 시작
+                            if(enemy.DemonDie == false)
+                            {
+                                Demon_cap.enabled = true; // 충돌 활성화
+                                Enemyagent.speed = 5;
+                                Enemyagent.isStopped = false; // 다시 이동 시작
+                            }
                         }
                     }
                 }
