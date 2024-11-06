@@ -37,11 +37,11 @@ public class ExitDoor : MonoBehaviour, IItem
     }
     public void Use()
     {
-        //ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¾Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ x
+        //ÀÎº¥Åä¸®¿¡¼­ »ç¿ëÇÏ´Â ¾ÆÀÌÅÛ¾Æ´Ô ±¸Çö x
     }
 
     public void ItemUIOn()
     {
-        InGameUIManager.instance.SetPlayerUI_Text("Å»ï¿½ï¿½ï¿½Ï±ï¿½ [G]");
+        InGameUIManager.instance.SetPlayerUI_Text("Å»ÃâÇÏ±â [G]");
     }
 }

@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     public Transform tr;
     [SerializeField] Light DeadSceneLight;
     [SerializeField] PlayableDirector director;
-    [Tooltip("ï¿½ï¿½ï¿½Ý»ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ä¾ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½Å¸ï¿½")]
+    [Tooltip("°ø°Ý»ç°Å¸®¿Í ÆÄ¾ÇÀ§Ä¡ »ç°Å¸®")]
     float distance = 20;
     float attackside = 2.0f;
     public int Demon_Counter = 0;
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DelayedStart()
     {
-        yield return new WaitForSeconds(1f); // 2ï¿½ï¿½ ï¿½ï¿½ï¿½
+        yield return new WaitForSeconds(1f); // 2ÃÊ ´ë±â
         StartCoroutine(StartFollowingPlayer());
         timer = 0;
         InvokeRepeating(nameof(UpdateTimer), 0f, 1f);
@@ -172,7 +172,7 @@ public class Enemy : MonoBehaviour
         while (true) 
         {
             FollowPlayertoAttack();
-            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
         }
     }
     void KillPlayer()
@@ -192,7 +192,7 @@ public class Enemy : MonoBehaviour
         DeadSceneLight.enabled = true;
         StopCoroutine("FalseDemon()");
         StopCoroutine("StartFollowingPlayer()");
-        agent.isStopped = true; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+        agent.isStopped = true; // ÀÌµ¿ ¸ØÃã
         agent.speed = 0;
         animator.SetTrigger("Kill");
         rb.freezeRotation = true;

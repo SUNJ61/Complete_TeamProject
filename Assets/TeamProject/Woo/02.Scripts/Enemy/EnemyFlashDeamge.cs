@@ -89,7 +89,7 @@ public class EnemyFlashDamage : MonoBehaviour
             {
                 timer += Time.deltaTime; // 타이머 증가
 
-                if (timer >= 2.5f)
+                if (timer >= 2f)
                 {
                     if (isSoundPlay)
                     {

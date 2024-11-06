@@ -75,9 +75,10 @@ public class PlayerHealth : CretureUpdate
         base.Die();
         MeshRenderer mesh = transform.GetChild(1).GetComponent<MeshRenderer>();
         mesh.enabled = false;
+       
     }
 
-    private void ShowEffect() //ï¿½Â¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+    private void ShowEffect() //¸Â¾ÒÀ» ¶§ ÀÌÆåÆ®±¸Çö ÇÔ¼ö
     {
         Color DamageEff = Damage_Image.color;
         float MaxAlpha = 0.3f;
@@ -130,7 +131,7 @@ public class PlayerHealth : CretureUpdate
 
         vignette.roundness.value = targetRoundness;
         Color finalColor = DeadImage.color;
-        finalColor.a = MaxAlpha; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        finalColor.a = MaxAlpha; // ÃÖÁ¾ ¾ËÆÄ °ª ¼³Á¤
         DeadImage.color = finalColor;
         Damage_Image.enabled = false;
         yield return new WaitForSeconds(4);
@@ -142,13 +143,13 @@ public class PlayerHealth : CretureUpdate
 
         InGameUIManager.instance.OnTalk(false);
         InGameUIManager.instance.Uioff_PlayerDead();
-        float targetRoundness = 1.0f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-        float duration = 9.5f; // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ã°ï¿½
+        float targetRoundness = 1.0f; // ÃÖÁ¾ °ª
+        float duration = 9.5f; // Áõ°¡ÇÏ´Â ½Ã°£
         float startRoundness = vignette.roundness.value;
         float elapsed = 0f;
         float startAlpha = DeadImage.color.a;
         float MaxAlpha = 255f;
-        float targetAlpha = 1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        float targetAlpha = 1f; // ÃÖÁ¾ ¾ËÆÄ °ª ¼³Á¤
 
         while (elapsed < duration)
         {

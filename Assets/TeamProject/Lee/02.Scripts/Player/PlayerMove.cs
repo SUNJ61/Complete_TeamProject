@@ -3,14 +3,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private CharacterController Player_Controller;
-    private Transform Camera_Pivot; //Ä«ï¿½Þ¶ï¿½ xï¿½ï¿½ È¸ï¿½ï¿½
+    private Transform Camera_Pivot; //Ä«¸Þ¶ó xÃà È¸Àü
     private Transform Player_Transform;
     public AudioSource PlayerSource;
     private AudioClip Walk;
     private AudioClip Run;
     private AudioClip Jump;
 
-    private Vector3 Velocity_y = Vector3.zero; //ï¿½ß·ï¿½
+    private Vector3 Velocity_y = Vector3.zero; //Áß·Â
 
     private float moveSpeed;
     private float currentXRot = 0f;
@@ -19,19 +19,19 @@ public class PlayerMove : MonoBehaviour
     private readonly float Gravity = -25f;
     private readonly float JumpHeight = 0.4f;
 
-    [SerializeField]private Vector3 playerDir = Vector3.zero; //ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField]private Vector3 playerDir = Vector3.zero; //ÀÌµ¿ ¹æÇâ
     public Vector3 PlayerDir
     { 
         get { return playerDir; } 
         set { playerDir = value; } 
     }
-    private Vector2 playerRot = Vector2.zero; //È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private Vector2 playerRot = Vector2.zero; //È¸Àü ¹æÇâ
     public Vector2 PlayerRot
     {
         get { return playerRot; }
         set { playerRot = value; }
     }
-    private bool player_isRun; //ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+    private bool player_isRun; //´Þ¸®±â ½ÇÇà Ã¼Å©
     public bool Player_isRun
     {
         get { return player_isRun; }
@@ -87,11 +87,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Player_Moving()
     {
-        if(PlayerDir == Vector3.zero || !IsGround) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if(PlayerDir == Vector3.zero || !IsGround) //¸ØÃçÀÖÀ» ¶§¿Í Á¡ÇÁ½Ã ¼Ò¸® ¸ØÃã
         {
             PlayerSource.Stop();
         }
-        else if (!Player_isRun) //ï¿½È±ï¿½
+        else if (!Player_isRun) //°È±â
         {
             moveSpeed = 3.0f;
             if (PlayerSource.clip != Walk || !PlayerSource.isPlaying)
@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
                 PlayerSource.Play();
             }
         }
-        else if (Player_isRun && PlayerDir.z >= 1.0f) //wÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½
+        else if (Player_isRun && PlayerDir.z >= 1.0f) //wÅ°¸¸ ´­·¶À» ¶§ ´Þ¸®±â
         {
             moveSpeed = 7.0f;
             if (PlayerSource.clip != Run || !PlayerSource.isPlaying)
@@ -109,7 +109,7 @@ public class PlayerMove : MonoBehaviour
                 PlayerSource.Play();
             }
         }
-        else if (Player_isRun && PlayerDir.z >= 0.7f) //wï¿½ï¿½ ad Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½
+        else if (Player_isRun && PlayerDir.z >= 0.7f) //w¿Í ad Å°¸¦ ´­·¶À» ¶§ ´Þ¸®±â
         {
             moveSpeed = 5.0f;
             if (PlayerSource.clip != Run || !PlayerSource.isPlaying)
