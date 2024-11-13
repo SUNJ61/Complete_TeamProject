@@ -13,16 +13,12 @@ public class DropBox : MonoBehaviour
 
     private void Awake()
     {
-        // PlayerPrefs¿¡¼­ ÀúÀåµÈ ¸ðµå ºÒ·¯¿À±â
-        int windowMode = PlayerPrefs.GetInt("WindowMode", 0); // ±âº»°ªÀº 0 (ÀüÃ¼ È­¸é)
-        FullScreenBtn(windowMode == 0);
-    }
-
-    void Start()
-    {
         fullscreenbtn = GameObject.Find("Ui").transform.GetChild(2).GetChild(2).GetChild(1).GetComponent<Toggle>();
         resolutionDropdown = GameObject.Find("Ui").transform.GetChild(2).GetChild(2).GetChild(0).GetComponent<Dropdown>();
         Init();
+        // PlayerPrefsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
+        int windowMode = PlayerPrefs.GetInt("WindowMode", 0); // ï¿½âº»ï¿½ï¿½ï¿½ï¿½ 0 (ï¿½ï¿½Ã¼ È­ï¿½ï¿½)
+        FullScreenBtn(windowMode == 0);  
     }
 
     void Init()
@@ -61,13 +57,13 @@ public class DropBox : MonoBehaviour
         {
             Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, FullScreenMode.FullScreenWindow);
             screenMode = FullScreenMode.FullScreenWindow;
-            PlayerPrefs.SetInt("WindowMode", 0); // ÀüÃ¼ È­¸é ÀúÀå
+            PlayerPrefs.SetInt("WindowMode", 0); // ï¿½ï¿½Ã¼ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else
         {
             Screen.SetResolution(resolutions[resolutionNum].width, resolutions[resolutionNum].height, FullScreenMode.Windowed);
             screenMode = FullScreenMode.Windowed;
-            PlayerPrefs.SetInt("WindowMode", 1); // Ã¢ ¸ðµå ÀúÀå
+            PlayerPrefs.SetInt("WindowMode", 1); // Ã¢ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 
@@ -76,8 +72,8 @@ public class DropBox : MonoBehaviour
         Resolution selectedResolution = resolutions[resolutionNum];
         Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullscreenbtn.isOn ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed);
 
-        // Åä±Û »óÅÂ ¾÷µ¥ÀÌÆ®
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         fullscreenbtn.isOn = Screen.fullScreenMode.Equals(FullScreenMode.MaximizedWindow);
-        PlayerPrefs.SetInt("WindowMode", fullscreenbtn.isOn ? 0 : 1); // »óÅÂ ÀúÀå
+        PlayerPrefs.SetInt("WindowMode", fullscreenbtn.isOn ? 0 : 1); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 }
