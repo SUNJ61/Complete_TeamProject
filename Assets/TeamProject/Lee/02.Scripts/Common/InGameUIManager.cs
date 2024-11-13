@@ -38,7 +38,6 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private AudioClip Ui_Button_Sound;
 
     private readonly float TalkPading = 20.0f;
-
     private readonly string PlayerUI_Obj = "PlayerUi";
     public bool OnOptionsPlayerstop = false;
     string fulltext = "문을 열고 탈출에 성공했고\n 뒤돌아 봤을땐 건물은 사라져 있었다...";
@@ -108,11 +107,11 @@ public class InGameUIManager : MonoBehaviour
     {
        
         GameManager.G_instance.isGameover = true;
+
         for (int i = 0; i < 5; i++)
         {
             PlayCanvaus.transform.GetChild(i).gameObject.SetActive(false);
         }
-        //OnOption_S_OFF();
         ActivePlayerUI_Text(false);
         OnTimer(false);
         StartCoroutine(EndingStartImage());
@@ -120,6 +119,7 @@ public class InGameUIManager : MonoBehaviour
     }
     public void OpenDoorONUi()
     {
+       
         Playerui.gameObject.SetActive(true);
         PlayCanvaus.gameObject.SetActive(true);
     }
@@ -181,15 +181,31 @@ public class InGameUIManager : MonoBehaviour
 
     public void OnOption_S_Toggle()
     {
-        OnOptionsPlayerstop = !OnOptionsPlayerstop;
-        if (OnOptionsPlayerstop)
+        if (!GameManager.G_instance.isGameover)
         {
-            Playerui.gameObject.SetActive(false);
-            S_Option_Bg.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            OnOptionsPlayerstop = !OnOptionsPlayerstop;
+            if (OnOptionsPlayerstop)
+            {
+                Playerui.gameObject.SetActive(false);
+                S_Option_Bg.gameObject.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                OnOptionsPlayerstop = false;
+                Playerui.gameObject.SetActive(true);
+                S_Option_Bg.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
-        else
+       
+        
+    }
+    public void OnOption_S_OFF()
+    {
+        if (!GameManager.G_instance.isGameover)
         {
             OnOptionsPlayerstop = false;
             Playerui.gameObject.SetActive(true);
@@ -197,16 +213,7 @@ public class InGameUIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        
-    }
-    public void OnOption_S_OFF()
-    {
-        
-        OnOptionsPlayerstop = false;
-        Playerui.gameObject.SetActive(true);
-        S_Option_Bg.gameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+       
     }
 
 

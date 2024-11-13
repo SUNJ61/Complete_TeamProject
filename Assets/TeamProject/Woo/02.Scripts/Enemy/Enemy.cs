@@ -14,8 +14,8 @@ public class Enemy : MonoBehaviour
     public string PlayTag = "Player";
     public Transform PlayerPos;
     public Transform tr;
-    [SerializeField] Light DeadSceneLight;
-    [SerializeField] PlayableDirector director;
+    Light DeadSceneLight;
+    PlayableDirector director;
     [Tooltip("공격사거리와 파악위치 사거리")]
     float distance = 20;
     float attackside = 2.0f;
@@ -24,12 +24,12 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     public bool DemonDie = false;
     float timer = 0;
-    [SerializeField] CinemachineStateDrivenCamera State_Demon;
-    [SerializeField] CinemachineVirtualCamera VirtualCamera_Demon;
-    [SerializeField] CapsuleCollider Demon_cap;
-    [SerializeField] ParticleSystem particle_somoke;
-    [SerializeField] AudioClip DemonDie_SFX;
-    [SerializeField] AudioClip DemonAttack_SFX;
+    CinemachineStateDrivenCamera State_Demon;
+    CinemachineVirtualCamera VirtualCamera_Demon;
+    CapsuleCollider Demon_cap;
+    ParticleSystem particle_somoke;
+    AudioClip DemonDie_SFX;
+    AudioClip DemonAttack_SFX;
     EnemyFlashDamage enemyFlash;
 
 

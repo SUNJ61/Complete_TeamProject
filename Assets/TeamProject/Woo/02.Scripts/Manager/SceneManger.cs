@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneManger : MonoBehaviour
 {
     public static SceneManger S_instance;
+
     void Awake()
     {
-        if(S_instance == null)
+       
+        if (S_instance == null)
         {
             S_instance = this;
         }

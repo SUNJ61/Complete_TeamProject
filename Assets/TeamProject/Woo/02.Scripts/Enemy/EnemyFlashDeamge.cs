@@ -16,7 +16,7 @@ public class EnemyFlashDamage : MonoBehaviour
     [SerializeField] CapsuleCollider Demon_cap;
     [SerializeField] AudioClip Demon_Steam;
 
-    [SerializeField] private Collider currentCollider; // ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹Ã¼ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Collider currentCollider; // ÇöÀç Ãæµ¹Ã¼ ÀúÀå
 
     private void Start()
     {
@@ -54,16 +54,16 @@ public class EnemyFlashDamage : MonoBehaviour
         {
             if (other.gameObject.CompareTag("FlashCol"))
             {
-                currentCollider = other; // ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹Ã¼ ï¿½ï¿½ï¿½ï¿½
+                currentCollider = other; // ÇöÀç Ãæµ¹Ã¼ ÀúÀå
                 Debug.Log(currentCollider);
 
-                if (currentCollider.enabled) // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+                if (currentCollider.enabled) // ÄÝ¶óÀÌ´õ°¡ È°¼ºÈ­µÇ¾î ÀÖÀ» ¶§
                 {
 
                     isFlashing = true;
                     particle_somoke.Play();
 
-                    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    // »ç¿îµå Àç»ý ·ÎÁ÷
                     if (!isSoundPlay && Demon_Steam != null)
                     {
                         Demon_Steam.name = $"Demon_Steam_{Demon_Counter}";
@@ -72,7 +72,7 @@ public class EnemyFlashDamage : MonoBehaviour
                     }
 
 
-                    StartCoroutine(FlashingCoroutine()); // ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
+                    StartCoroutine(FlashingCoroutine()); // ÄÚ·çÆ¾ ½ÃÀÛ
                 }
             }
 
@@ -85,9 +85,9 @@ public class EnemyFlashDamage : MonoBehaviour
         while (isFlashing && timer < 3f)
         {
             print(timer);
-            if (currentCollider != null && currentCollider.enabled) // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½
+            if (currentCollider != null && currentCollider.enabled) // ÄÝ¶óÀÌ´õ°¡ È°¼ºÈ­µÈ °æ¿ì
             {
-                timer += Time.deltaTime; // Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+                timer += Time.deltaTime; // Å¸ÀÌ¸Ó Áõ°¡
 
                 if (timer >= 2f)
                 {
@@ -100,18 +100,18 @@ public class EnemyFlashDamage : MonoBehaviour
                         isFlashing = false;
                         if (enemy.Killplayer == false)
                         {
-                            Demon_cap.enabled = false; // ï¿½æµ¹ ï¿½ï¿½È°ï¿½ï¿½È­
+                            Demon_cap.enabled = false; // Ãæµ¹ ºñÈ°¼ºÈ­
                             particle_somoke.Stop();
-                            Enemyagent.isStopped = true; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+                            Enemyagent.isStopped = true; // ÀÌµ¿ ¸ØÃã
                             Enemyagent.speed = 0;
-                            Enemyanimator.SetTrigger("Flash"); // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½
+                            Enemyanimator.SetTrigger("Flash"); // ¾Ö´Ï¸ÞÀÌ¼Ç Æ®¸®°Å
 
-                            yield return new WaitForSeconds(4.5f); // ï¿½ï¿½ï¿½
+                            yield return new WaitForSeconds(4.5f); // ´ë±â
                             if(enemy.DemonDie == false)
                             {
-                                Demon_cap.enabled = true; // ï¿½æµ¹ È°ï¿½ï¿½È­
+                                Demon_cap.enabled = true; // Ãæµ¹ È°¼ºÈ­
                                 Enemyagent.speed = 5;
-                                Enemyagent.isStopped = false; // ï¿½Ù½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
+                                Enemyagent.isStopped = false; // ´Ù½Ã ÀÌµ¿ ½ÃÀÛ
                             }
                         }
                     }
@@ -120,11 +120,11 @@ public class EnemyFlashDamage : MonoBehaviour
             }
             else
             {
-                HandleExitState(); // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-                yield break; // ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
+                HandleExitState(); // ÄÝ¶óÀÌ´õ°¡ ºñÈ°¼ºÈ­µÈ °æ¿ì »óÅÂ Á¾·á
+                yield break; // ÄÚ·çÆ¾ Á¾·á
             }
 
-            yield return null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
         }
     }
 
@@ -132,15 +132,15 @@ public class EnemyFlashDamage : MonoBehaviour
     {
         if (other == currentCollider)
         {
-            HandleExitState(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
-            currentCollider = null; // ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹Ã¼ ï¿½Ê±ï¿½È­
+            HandleExitState(); // »óÅÂ Á¾·á Ã³¸®
+            currentCollider = null; // ÇöÀç Ãæµ¹Ã¼ ÃÊ±âÈ­
         }
     }
 
     public void HandleExitState()
     {
      
-        isFlashing = false; // ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        isFlashing = false; // ÇÃ·¡½Ã »óÅÂ Á¾·á
 
         if (isSoundPlay && InGameSoundManager.instance.Data.ContainsKey($"Demon_Steam_{Demon_Counter}"))
         {
@@ -148,9 +148,9 @@ public class EnemyFlashDamage : MonoBehaviour
             InGameSoundManager.instance.Data.Remove($"Demon_Steam_{Demon_Counter}");
         }
 
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
-        timer = 0f; // Å¸ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
-        particle_somoke.Stop(); // ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½
-        isSoundPlay = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        // »óÅÂ ÃÊ±âÈ­
+        timer = 0f; // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+        particle_somoke.Stop(); // ÆÄÆ¼Å¬ Á¤Áö
+        isSoundPlay = false; // »ç¿îµå »óÅÂ ÃÊ±âÈ­
     }
 }

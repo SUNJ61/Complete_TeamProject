@@ -62,7 +62,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < CandlePos.Count; i++)
             CandleRandomIdx.Add(i);
     }
-    private void GetPoint(List<Transform> PosList, string GetPosName) //Posï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+    private void GetPoint(List<Transform> PosList, string GetPosName) //Pos¸®½ºÆ® °¡Àú¿À±â.
     {
         var spawn = GameObject.Find(GetPosName).transform;
         if (spawn != null)
@@ -72,7 +72,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void FarRespawnSetup(List<Transform> SpawnPoint, GameObject RespawnObj, Transform Standard) //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ Ã£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void FarRespawnSetup(List<Transform> SpawnPoint, GameObject RespawnObj, Transform Standard) //¸Õ ¸®½ºÆù À§Ä¡ Ã£´Â ·ÎÁ÷
     {
         float Respawn_Dist = (SpawnPoint[0].position - Standard.position).magnitude;
         Vector3 Respawn_Pos = SpawnPoint[0].position;
@@ -86,7 +86,7 @@ public class SpawnManager : MonoBehaviour
         RespawnObj.transform.position = Respawn_Pos;
     }
 
-    public void SetActiveDemonTrue(GameObject candlepos) //ï¿½Ðºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
+    public void SetActiveDemonTrue(GameObject candlepos) //ÃÐºÒÀÌ ²¨Áö¸é µ¥¸ó ÇÔ¼ö È£Ãâ
     {
         if (candlepos != null)
         {
@@ -110,7 +110,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void SetActiveBookHead_Final() //ï¿½Ðºï¿½ 6ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
+    public void SetActiveBookHead_Final() //ÃÐºÒ 6°³ ²¨Áö¸é È£Ãâ
     {
         GameObject bookhead = Pulling_Manger.instance.GetObject(1);
         bookhead.transform.position = Fin_BookHeadSpawnPos;
@@ -130,14 +130,14 @@ public class SpawnManager : MonoBehaviour
         BookHead_IndexCoundter++;
     }
 
-    public void SetActiveBookHead() //ï¿½Ì¼Ç½ï¿½ï¿½Û¿ï¿½ È£ï¿½ï¿½
+    public void SetActiveBookHead() //¹Ì¼Ç½ÃÀÛ¿¡ È£Ãâ
     {
         GameObject bookhead = Pulling_Manger.instance.GetObject(1);
         if (bookhead != null)
             StartCoroutine(RespawnWait(10f, BookHead_SpawnPoint, bookhead, Player_Tr));
     }
 
-    public void BookHeadRespawn(GameObject RespawnObj) //ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½
+    public void BookHeadRespawn(GameObject RespawnObj) //ºÏÇìµå°¡ ÇÃ·¹ÀÌ¾î¿¡°Ô Á×¾úÀ» ¶§ È£Ãâ
     {
         StartCoroutine(RespawnWait(10f, BookHead_SpawnPoint, RespawnObj, Player_Tr));
     }
@@ -162,7 +162,7 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    public void SetActiveTrueCandel() //ï¿½Ì¼Ç½ï¿½ï¿½Û½ï¿½ È£ï¿½ï¿½
+    public void SetActiveTrueCandel() //¹Ì¼Ç½ÃÀÛ½Ã È£Ãâ
     {
 
         foreach (GameObject candle in Pulling_Manger.instance.Data[2].Pool_List)
@@ -180,7 +180,7 @@ public class SpawnManager : MonoBehaviour
     }
     public void SetActiveTrueItem()
     {
-        foreach (GameObject item in Pulling_Manger.instance.Data[3].Pool_List) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ 3 ~ 7ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+        foreach (GameObject item in Pulling_Manger.instance.Data[3].Pool_List) //¾ÆÀÌÅÛ ¸®½ºÆ®´Â 3 ~ 7¹ø ÀüºÎ µ¿ÀÏ 
         {
             int idx = GetRandomIdx(ItemRandomIdx);
             item.transform.parent = ItemPos[idx];
@@ -193,7 +193,7 @@ public class SpawnManager : MonoBehaviour
             Destroy(itemGroup);
         }
     }
-    private int GetRandomIdx(List<int> RandomIdx) // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½.
+    private int GetRandomIdx(List<int> RandomIdx) // ¸®½ºÆ®¿¡¼­ ·£´ý°ª »Ì±â.
     {
         int i = Random.Range(0, RandomIdx.Count);
         int idx = RandomIdx[i];
